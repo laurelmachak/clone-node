@@ -17,7 +17,10 @@ body{
   grid-template-rows: 2em auto;
   background-color:#a1b290;
   height:100vh;
-  
+  position:absolute;
+  top:0;
+  left:0;
+
 }
 
 #top-tool-bar{
@@ -38,10 +41,10 @@ body{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   grid-auto-rows:7em;
-  
+
   justify-items:center;
-  
-    justify-content: space-evenly;	
+
+    justify-content: space-evenly;
 }
 
 .component{
@@ -58,7 +61,7 @@ body{
   align-self: end;
   border:none;
   z-index:10;
-  
+
 }
 
 .component:hover{
@@ -81,22 +84,22 @@ body{
   border:none;
   background-color:#d7edc0;
   --cell-size: 1em;
-  background-image:
+  /* background-image:
   linear-gradient(rgba(0,0,0,.3) .1em, transparent .1em), /*minor horiz*/
   linear-gradient(#1b1e18 .1em, transparent .1em), /*major horiz*/
   linear-gradient(90deg, rgba(0,0,0,.3) .1em, transparent .1em), /*minor vert*/
-  linear-gradient(90deg, #1b1e18 .1em, transparent .1em); /*major vert*/
-    
-  background-size: 
+  linear-gradient(90deg, #1b1e18 .1em, transparent .1em); /*major vert*/ */
+
+  /* background-size:
     calc(10em / 10) calc(10em / 10),
     10em 10em,
     calc(10em / 10) calc(10em / 10),
     10em 10em,
     10em 10em,
-    10em 10em;
-    
+    10em 10em; */
+
 /*
-    background-size: 
+    background-size:
     calc(10vw / 10) calc(10vw / 10),
     10vw 10vw,
     calc(10vw / 10) calc(10vw / 10),
@@ -105,22 +108,40 @@ body{
     10vw 10vw;
 */
   position:relative;
-  
+
 }
+
+/* button mock up sidebar mock up */
 
 .copy{
     --x: 0;
     --y: 0;
-    display:block;
+    /* display:block;
     width:5em;
-    height:5em;
+    height:5em; */
 /*    background-color:white;*/
-    background-image: url('../../../Desktop/component_svgs/capacitor.svg');
+    /* background-image: url('../../../Desktop/component_svgs/capacitor.svg');
     background-size: 5em 5em;
-    position:absolute;
-    transform: 
-        translateX(calc(var(--x) * 1px)) 
+    position:absolute; */
+    transform:
+        translateX(calc(var(--x) * 1px))
         translateY(calc(var(--y) * 1px));
     z-index:40;
 }
 
+g{
+  --x:0;
+  --y:0;
+  transform:
+    translateX(calc(var(--x) * 1px))
+    translateY(calc(var(--y) * 1px));
+  z-index:40;
+}
+
+#svg-container{
+  width:100vw;
+  height:100vh;
+  display:relative;
+  z-index:100000;
+  fill:green;
+}

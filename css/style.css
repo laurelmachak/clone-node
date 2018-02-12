@@ -136,12 +136,13 @@ g{
     translateX(calc(var(--x) * 1px))
     translateY(calc(var(--y) * 1px));
   z-index:40;
+  fill:rgba(0,0,0,.5)
 }
 
 #svg-container{
   width:100vw;
   height:100vh;
-  display:relative;
-  z-index:100000;
+  position:relative;
+  /* z-index:100000; */
   fill:green;
 }

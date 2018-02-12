@@ -87,6 +87,8 @@ get_one_element('.component').onmousedown = function(ev){
 
 }
 
+
+
 // $('body').on('mousedown','.component', function(ev){
 //     // const pos = $(this).position()
 //     // console.log(pos)
@@ -131,8 +133,16 @@ window.onmouseup = function(ev) {
 }
 
 
+//
+// const svg_container = get_one_element('#svg_container')
+//
+// svg_container.onmousedown = function(ev) {
+//
+// }
 
-    function allowDrop(ev) {
+
+
+function allowDrop(ev) {
     ev.preventDefault();
 }
 

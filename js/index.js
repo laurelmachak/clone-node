@@ -19,14 +19,43 @@
 // and allow us to drag it and drop it. Once dropped, dragThing will be
 // set back to null
 
-// ----------------------------------------------
+// ---------------------------------------------------------------------------------------------
 // Helper utilities (eventually move to helpers.js)
+
+// helper function that returns a DOM object:
 
 function get_one_element(name){
   return document.querySelector(name)
 }
 
-// ----------------------------------------------
+// helper function to look for the closest element via class name:
+
+function closest(elem, selector) {
+  // Borrowed from:
+  // https://gomakethings.com/climbing-up-and-down-the-dom-tree-with-vanilla-javascript/
+  // Element.matches() polyfill
+    if (!Element.prototype.matches) {
+      Element.prototype.matches =
+        Element.prototype.matchesSelector ||
+        Element.prototype.mozMatchesSelector ||
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.oMatchesSelector ||
+        Element.prototype.webkitMatchesSelector ||
+        function(s) {
+          var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+            i = matches.length;
+          while (--i >= 0 && matches.item(i) !== this) {}
+          return i > -1;
+        };
+    }
+    // Get closest match
+    for (; elem && elem !== document; elem = elem.parentNode) {
+      if (elem.matches(selector)) return elem;
+    }
+    return null;
+  }
+
+// -------------------------------------------------------------------------------------
 // Component Class Definition (eventually move to component.js)
 
 (function(){
@@ -70,6 +99,9 @@ function get_one_element(name){
 
 let dragThing = null
 let cloneNum = 0
+const svg_container = get_one_element('#svg-container')
+const parts = {}
+
 
 
 /*
@@ -78,13 +110,28 @@ let cloneNum = 0
             in #library-wrapper =======
 */
 
+// creates an element from the library of elements
 get_one_element('.component').onmousedown = function(ev){
   const thing = Component('resistor', get_one_element('#resistor'))
   cloneNum += 1
   console.log('thing: ',thing)
   get_one_element('#svg-container').appendChild(thing.el)
+  // at to dictionary of all existing parts
+  parts['clone_' + (cloneNum - 1)] = thing
   dragThing = thing
+  console.log(parts)
 
+}
+
+svg_container.onmousedown = function(ev){
+
+     // Look for the element with the class name part in ancestors of the target
+  const selected = closest(ev.target, '.part')
+  if (selected === null) return // End here if we don't find anything
+  // Otherwise get the part from the parts object via it's id
+  const part = parts[selected.getAttribute('id')]
+
+  dragThing = part
 }
 
 
@@ -152,6 +199,7 @@ function drag(ev) {
  // make sure you allow theitem to be draggable
  // and attach this function to the object in the html
     ev.dataTransfer.setData("text", ev.target.id);
+
     console.log('ev.target.id: ', ev.target.id)
 }
 

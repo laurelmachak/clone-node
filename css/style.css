@@ -82,7 +82,7 @@ body{
 /*  height:100vh;*/
   align-self:stretch;
   border:none;
-  background-color:#d7edc0;
+  background-color:rgba(215,237,192,.5);
   --cell-size: 1em;
   /* background-image:
   linear-gradient(rgba(0,0,0,.3) .1em, transparent .1em), /*minor horiz*/
@@ -137,6 +137,7 @@ g{
     translateY(calc(var(--y) * 1px));
   z-index:40;
   fill:rgba(0,0,0,.5)
+  stroke:black;
 }
 
 #svg-container{
